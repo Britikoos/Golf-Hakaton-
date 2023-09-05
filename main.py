@@ -5,12 +5,11 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
 # Загрузка видео с веб-камеры
-cap = cv2.VideoCapture("video2.mp4")
+cap = cv2.VideoCapture(0)
 
 with mp_pose.Pose(
-    min_detection_confidence=0.5,
-    min_tracking_confidence=0.5) as pose:
-
+        min_detection_confidence=0.5,
+        min_tracking_confidence=0.5) as pose:
     while cap.isOpened():
         # Чтение кадра из видеопотока
         ret, frame = cap.read()
@@ -20,7 +19,7 @@ with mp_pose.Pose(
 
         # Обнаружение позы на кадре
         results = pose.process(image)
-        # results.pose_landmarks - координаты
+        print(results.pose_landmarks)
 
         # Отображение результатов на кадре
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
